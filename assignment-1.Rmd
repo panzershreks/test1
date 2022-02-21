@@ -1,0 +1,533 @@
+---
+editor_options:
+  markdown:
+    wrap: 72
+output: pdf_document
+---
+
+**University of Edinburgh**
+
+**School of Mathematics**
+
+**Bayesian Data Analysis, 2021/2022, Semester 2**
+
+**Lecturer: Daniel Paulin**
+
+**Assignment 1**
+
+**IMPORTANT INFORMATION ABOUT THE ASSIGNMENT**
+
+**In this paragraph, we summarize the essential information about this
+assignment. The format and rules for this assignment are different from
+your other courses, so please pay attention.**
+
+**1) Deadline: The deadline for submitting your solutions to this
+assignment is the 7 March 12:00 noon Edinburgh time.**
+
+**2) Format: You will need to submit your work as 2 components: a PDF
+report, and your R Markdown (.Rmd) notebook. There will be two separate
+submission systems on Learn: Gradescope for the report in PDF format,
+and a Learn assignment for the code in Rmd format. You are encouraged to
+write your solutions into this R Markdown notebook (code in R chunks and
+explanations in Markdown chunks), and then select Knit/Knit to PDF in
+RStudio to create a PDF report.**
+
+![](knit_to_PDF.jpg){width="191"}
+
+**It suffices to upload this PDF in Gradescope submission system, and
+your Rmd file in the Learn assignment submission system. You will be
+required to tag every sub question on Gradescope. A video describing the
+submission process will be posted on Learn.**
+
+**Some key points that are different from other courses:**
+
+**a) Your report needs to contain written explanation for each question
+that you solve, and some numbers or plots showing your results.
+Solutions without written explanation that clearly demonstrates that you
+understand what you are doing will be marked as 0 irrespectively whether
+the numerics are correct or not.**
+
+**b) Your code has to be possible to run for all questions by the Run
+All in RStudio, and reproduce all of the numerics and plots in your
+report (up to some small randomness due to stochasticity of Monte Carlo
+simulations). The parts of the report that contain material that is not
+reproduced by the code will not be marked (i.e. the score will be 0),
+and the only feedback in this case will be that the results are not
+reproducible from the code.**
+
+![](run_all.jpg){width="376"}
+
+**c) Multiple Submissions are allowed BEFORE THE DEADLINE are allowed
+for both the report, and the code. However, multiple submissions are NOT
+ALLOWED AFTER THE DEADLINE. YOU WILL NOT BE ABLE TO MAKE ANY CHANGES TO
+YOUR SUBMISSION AFTER THE DEADLINE. Nevertheless, if you did not submit
+anything before the deadline, then you can still submit your work after
+the deadline. Late penalties will apply unless you have a valid
+extension. The timing of the late penalties will be determined by the
+time you have submitted BOTH the report, and the code (i.e. whichever
+was submitted later counts).**
+
+**We illustrate these rules by some examples:**
+
+**Alice has spent a lot of time and effort on her assignment for BDA.
+Unfortunately she has accidentally introduced a typo in her code in the
+first question, and it did not run using Run All in RStudio. - Alice
+will get 0 for the whole assignment, with the only feedback "Results are
+not reproducible from the code".**
+
+**Bob has spent a lot of time and effort on his assignment for BDA.
+Unfortunately he forgot to submit his code. - Bob will get no personal
+reminder to submit his code. Bob will get 0 for the whole assignment,
+with the only feedback "Results are not reproducible from the code, as
+the code was not submitted."**
+
+**Charles has spent a lot of time and effort on his assignment for BDA.
+He has submitted both his code and report in the correct formats.
+However, he did not include any explanations in the report. Charles will
+get 0 for the whole assignment, with the only feedback "Explanation is
+missing."**
+
+**Denise has spent a lot of time and effort on her assignment for BDA.
+She has submitted her report in the correct format, but thought that she
+can include her code as a link in the report, and upload it online (such
+as Github, or Dropbox). - Denise will get 0 for the whole assignment,
+with the only feedback "Code was not uploaded on Learn."**
+
+**3) Group work: This is an INDIVIDUAL ASSIGNMENT, like a 2 week exam
+for the course. Communication between students about the assignment
+questions is not permitted. Students who submit work that has not been
+done individually will be reported for Academic Misconduct, that can
+lead to serious consequences. Each problem will be marked by a single
+instructor, so we will be able to spot students who copy.**
+
+**4) Piazza: You are NOT ALLOWED to post questions about Assignment
+Problems visible to Everyone on Piazza. You need to specify the
+visibility of such questions as Instructors only, by selecting Post to /
+Individual students/Instructors and type in Instructors and click on the
+blue Instructors banner that appears below**
+
+![](piazza_instructors.jpg)
+
+**Students who post any information related to the solution of
+assignment problems visible to their classmates will**
+
+**a) have their access to Piazza revoked for the rest of the course
+without prior warning, and**
+
+**b) reported for Academic Misconduct.**
+
+**Only questions regarding clarification of the statement of the
+problems will be answered by the instructors. The instructors will not
+give you any information related to the solution of the problems, such
+questions will be simply answered as "This is not about the statement of
+the problem so we cannot answer your question."**
+
+**THE INSTRUCTORS ARE NOT GOING TO DEBUG YOUR CODE, AND YOU ARE ASSESSED
+ON YOUR ABILITY TO RESOLVE ANY CODING OR TECHNICAL DIFFICULTIES THAT YOU
+ENCOUNTER ON YOUR OWN.**
+
+**5) Office hours: There will be two office hours per week (Monday
+16:00-17:00, and Wednesdays 16:00-17:00) during the 2 weeks for this
+assignment. The links are available on Learn / Course Information. We
+will be happy to discuss the course/workshop materials. However, we will
+only answer questions about the assignment that require clarifying the
+statement of the problems, and will not give you any information about
+the solutions. Students who ask for feedback on their assignment
+solutions during office hours will be removed from the meeting.**
+
+**6) Late submissions and extensions: Students who have existing
+Learning Adjustments in Euclid will be allowed to have the same
+adjustments applied to this course as well, but they need to apply for
+this BEFORE THE DEADLINE on the website**
+
+<https://www.ed.ac.uk/student-administration/extensions-special-circumstances>
+
+**by clicking on "Access your learning adjustment". This will be
+approved automatically.**
+
+**For students without Learning Adjustments, if there is a justifiable
+reason (external circumstances) for not being able to submit your
+assignment in time, then you can apply for an extension BEFORE THE
+DEADLINE on the website**
+
+<https://www.ed.ac.uk/student-administration/extensions-special-circumstances>
+
+**by clicking on "Apply for an extension". Such extensions are processed
+entirely by the central ESC team. The course instructors have no role in
+this decision so you should not write to us about such applications. You
+can contact our Student Learning Advisor, Maria Tovar Gallardo
+([maria.tovar\@ed.ac.uk](mailto:maria.tovar@ed.ac.uk){.email}) in case
+you need some advice regarding this.**
+
+**Students who submit their work late will have late submission
+penalties applied by the ESC team automatically (this means that even if
+you are 1 second late because of your internet connection was slow, the
+penalties will still apply). The penalties are 5% of the total mark
+deduced for every day of delay started (i.e. one minute of delay counts
+for 1 day). The course intructors do not have any role in setting these
+penalties, we will not be able to change them.**
+
+![](rotifer.jpg){width="56%"}
+
+![](algae.jpg){width="38%"}
+
+The first picture is a rotifier (by Steve Gschmeissner), the second is a
+unicellular algae (by NEON ja, colored by Richard Bartz).
+
+**Problem 1 - Rotifier and algae data**
+
+**In this problem, we study an experimental dataset (Blasius et al.
+2020, <https://doi.org/10.1038/s41586-019-1857-0>) about predator-prey
+relationship between two microscopic organism: rotifier (predator) and
+unicellular green algae (prey). These were studied in a controlled
+environment (water tank) in a laboratory over 375 days. The dataset
+contains daily observations of the concentration of algae and rotifiers.
+The units of measurement in the algae column is** $\mathbf{10^6}$
+**algae cells per ml of water, while in the rotifier column it is the
+number of rotifiers per ml of water.**
+
+**We are going to apply a simple two dimensional state space model on
+this data using JAGS. The first step is to load JAGS and the dataset.**
+
+```{r}
+# We load JAGS
+library(rjags)
+
+#You may need to set the working directory first before loading the dataset
+#setwd("/Users/dpaulin/Dropbox/BDA_2021_22/Assignments/Assignment1")
+rotifier_algae=read.csv("rotifier_algae.csv")
+#The first 6 rows of the dataframe
+print.data.frame(rotifier_algae[1:6,])
+```
+
+**As we can see, some values in the dataset are missing (NA)**.
+
+**We are going to model the true log concentrations** $\mathbf{x}_t$
+**by the state space
+model**$$\mathbf{x}_t = \mathbf{A} \mathbf{x}_{t-1}+\mathbf{b}+\mathbf{w}_t; \quad \mathbf{w}_t\sim N\left(0,\left(\begin{matrix}\sigma_R^2 & 0\\ 0 & \sigma_A^2\end{matrix}\right)\right)$$\
+**where** $\mathbf{A}$**,** $\mathbf{b}$, $\sigma^2_R$ **and**
+$\sigma^2_A$ **are model parameters, and** $t$ **denotes the time point.
+In particular,** $t=0$ **corresponds to day 0, and** $t=1,2,\ldots, 375$
+**correspond to days 1-375.**
+
+**Here** $\mathbf{x}_t$ **is a two dimensional vector. The first
+component denotes the logarithm of the rotifier concentration measured
+in number of rotifiers per ml of water, and the second component denotes
+the logarithm of the algae concentration measured in** $10^6$ **algae
+per ml (these units are the same as in the dataset).**
+$\mathbf{A}=\left(\begin{matrix}A_{11} & A_{12}\\ A_{21} & A_{22}\end{matrix}\right)$
+**is a two times two matrix, and** $\mathbf{b}$ **is a two dimensional
+vector.**
+
+**The observation process is described as**
+$$\mathbf{y}_t =\mathbf{x}_{t}+\mathbf{v}_t, \quad \mathbf{v}_t\sim N\left(0,\left(\begin{matrix}\eta_R^2 & 0\\ 0 & \eta_A^2\end{matrix}\right)\right),$$
+
+**where** $\mathbf{y}_t$ **is the observed log concentration on day**
+$t$ **(for example,**
+$\mathbf{y}_2=\left(\begin{matrix}\log(6.58)\\ \log(0.82)\end{matrix}\right)$
+**in our dataset), while** $\eta_R^2$ **and** $\eta_R^2$ **are
+additional model parameters.**
+
+**a)[10 marks] Create a JAGS model that fits the above state space model
+on the rotifier-algae dataset for the whole 375 days period.**
+
+**Use 10000 burn-in steps and obtain 50000 samples from the model
+parameters**
+$\mathbf{A}, \mathbf{b}, \sigma_R^2, \sigma_A^2, \eta_R^2, \eta_A^2$
+**(4+2+4=10 parameters in total).**
+
+**Use a Gaussian prior**
+$N\left(\left(\begin{matrix}\log(6)\\ \log(1.5) \end{matrix}\right), \left(\begin{matrix}4 & 0\\ 0 & 4\end{matrix}\right) \right)$
+**for the initial state** $\mathbf{x}_0$**, Gaussian prior**
+$N\left(\left(\begin{matrix}0\\ 0 \end{matrix}\right), \left(\begin{matrix}1 & 0\\ 0 & 1\end{matrix}\right) \right)$
+**for** $\mathbf{b}$**, and inverse Gamma (0.1,0.1) prior for the
+variance parameters** $\sigma_R^2, \sigma_A^2, \eta_R^2, \eta_A^2$**.**
+
+**Explain how did you handle the fact that some of the observations are
+missing (NA) in the dataset.**
+
+Explanation: (Write your explanation here)
+
+```{r}
+
+```
+
+**b)[10 marks]**
+
+**Based on your MCMC samples, compute the Gelman-Rubin convergence
+diagnostics (Hint: you need to run multiple chains in parallel for this
+by setting the n.chains parameter). Discuss how well has the chain
+converged to the stationary distribution based on the results.**
+
+**Print out the summary of the fitted JAGS model. Do autocorrelation
+plots for the 4 components of the model parameter** $\mathbf{A}$**.**
+
+**Compute and print out the effective sample sizes (ESS) for each of the
+model parameters**
+$\mathbf{A}, \mathbf{b}, \sigma_R^2, \sigma_A^2, \eta_R^2, \eta_A^2$**.**
+
+**If the ESS is below 1000 for any of these 10 parameters, increase the
+sample size/number of chains until the ESS is above 1000 for all 10
+parameters.**
+
+Explanation: (Write your explanation here)
+
+```{r}
+
+```
+
+**c)[10 marks]**
+
+**We are going to perform posterior predictive checks to evaluate the
+fit of this model on the data (using the priors stated in question a).
+First, create replicate observations from the posterior predictive using
+JAGS. The number of replicate observations should be at least 1000.**
+
+**Compute the minimum, maximum, and median for both log-concentrations
+(i.e. both for rotifier and algae,** $3\cdot 2=6$ **in total).**
+
+**Plot the histograms for these quantities together with a line that
+shows the value of the function considered on the actual dataset (see
+the R code for Lecture 2 for an example). Compute the DIC score for the
+model (Hint: you can use the `dic.samples` function for this).**
+
+**Discuss the results.**
+
+Explanation: (Write your explanation here)
+
+```{r}
+
+```
+
+**d)[10 marks]**
+
+**Discuss the meaning of the** **model parameters**
+$\mathbf{A}, \mathbf{b}, \sigma_R^2, \sigma_A^2, \eta_R^2, \eta_A^2$**.
+Find a website or paper that that contains information about rotifiers
+and unicellular algae (Hint: you can use Google search for this). Using
+your understanding of the meaning of model parameters and the biological
+information about these organisms, construct more informative prior
+distributions for the model parameters. State in your report the source
+of information and the rationale for your choices of priors.**
+
+**Re-implement the JAGS model with these new priors. Perform the same
+posterior predictive checks as in part c) to evaluate the fit of this
+new model on the data.**
+
+**Compute the DIC score for the model as well (Hint: lower DIC score
+indicates better fit on the data).**
+
+**Discuss whether your new priors have improved the model fit compared
+to the original prior from a).**
+
+Explanation: (Write your explanation here)
+
+```{r}
+
+```
+
+**e)[10 marks] Update the model with your informative prior in part d)
+to compute the posterior distribution of the log concentrations sizes
+(**$\mathbf{x}_t$**) on the days 376-395 (20 additional days).**
+
+**Plot the evolution of the posterior mean of the log concentrations for
+rotifier and algae during days 376-395 on a single plot, along with
+curves that correspond to the [2.5%, 97.5%] credible interval of the log
+concentration size (**$\mathbf{x}_t$\*\*) according to the posterior
+distribution at each year [Hint: you need\*\*\*\* $2+2\cdot 2 = 6$
+\*\*curves in total, use different colours for the curves for rotifier
+and algae].
+
+**Finally, estimate the posterior probability that the concentration of
+algae (measured in 10\^6 algae/ml, as in the data) becomes smaller
+than** $0.1$ **at any time during this 20 additional days (days
+376-395).**
+
+Explanation: (Write your explanation here)
+
+```{r}
+
+```
+
+![](horse_racing.jpg){width="100%"}
+
+**Problem 2 - Horse racing data**
+
+**In this problem, we are going to construct a predictive model for
+horse races. The dataset (races.csv and runs.csv) contains the
+information about 1000 horse races in Hong Kong during the years
+1997-1998 (originally from <https://www.kaggle.com/gdaley/hkracing>).
+Races.csv contains information about each race (such as distance, venue,
+track conditions, etc.), while runs.csv contains information about each
+horse participating in each race (such as finish time in the race).
+Detailed description of all columns in these files is available in the
+file horse_racing_data_info.txt.**
+
+**Our goal is to model the mean speed of each horse during the races
+based on covariates available before the race begins.**
+
+**We are going to use INLA to fit several different regression models to
+this dataset. First, we load ILNA and the datasets and display the first
+few rows.**
+
+```{r}
+library(INLA)
+
+#If it loaded correctly, you should see this in the output:
+#Loading required package: Matrix
+#Loading required package: foreach
+#Loading required package: parallel
+#Loading required package: sp
+#This is INLA_21.11.22 built 2021-11-21 16:13:28 UTC.
+# - See www.r-inla.org/contact-us for how to get help.
+# - To enable PARDISO sparse library; see inla.pardiso()
+
+#The following code does the full installation. You can try it if INLA has not been installed.
+#First installing some of the dependencies
+#install.packages("BiocManager")
+#BiocManager::install("Rgraphviz")
+#if (!requireNamespace("BiocManager", quietly = TRUE))
+#    install.packages("BiocManager")
+#BiocManager::install("graph")
+#Installing INLA
+#install.packages("INLA",repos=c(getOption("repos"),INLA="https://inla.r-inla-download.org/R/stable"), dep=TRUE)
+#library(INLA)
+```
+
+```{r}
+runs <- read.csv(file = 'runs.csv')
+head(runs)
+```
+
+```{r}
+races<- read.csv(file = 'races.csv')
+head(races)
+```
+
+**a)[10 marks] Create a dataframe that includes the mean speed of each
+horse in each race and the distance of the race in a column [Hint: you
+can do this adding two extra columns to the runs dataframe].**
+
+**Fit a linear regression model (lm) with the mean speed as a response
+variable. The covariates should be the horse id as a categorical
+variable, and the race distance, horse rating, and horse age as standard
+variable. Scale the non-categorical covariates before fitting the model
+(i.e. center and divide by their standard deviation, you can use the**
+`scale` **function in R for this).**
+
+**Print out the summary of the lm model, discuss the quality of the
+fit.**
+
+Explanation: (Write your explanation here)
+
+```{r}
+
+```
+
+**b)[10 marks] Fit the same model in INLA (i.e. Bayesian linear
+regression with Gaussian likelihood, mean speed is the response
+variable, and the same covariates used with scaling for the
+non-categorical covariates). Set a Gamma (0.1,0.1) prior for the
+precision, and Gaussian priors with mean zero and variance 1000000 for
+all of the regression coefficients (including the intercept).**
+
+**Print out the summary of the INLA model. Compute the posterior mean of
+the variance parameter** $\sigma^2$**. Plot the posterior density for
+the variance parameter** $\sigma^2$**. Compute the negative sum log CPO
+(NSLCPO) and DIC values for this model (smaller values indicate better
+fit).**
+
+**Compute the standard deviation of the mean residuals (i.e. the
+differences between the posterior mean of the fitted values and the true
+response variable).**
+
+**Discuss the results.**
+
+Explanation: (Write your explanation here)
+
+```{r}
+
+```
+
+**c)[10 marks] In this question, we are going to improve the model in b)
+by using more informative priors and more columns from the dataset.**
+
+**First, using some publicly available information from the internet
+(Hint: use Google search) find out about the typical speed of race
+horses in Hong Kong, and use this information to construct a prior for
+the intercept. Explain the rationale for your choice.**
+
+**Second, look through all of the information in the datasets that is
+available before the race (Hint: you need to read the description
+horse_racing_data_info.txt for information about the columns. position,
+behind, result, won, and time related columns are not available before
+the race). Discuss your rationale for including some of these in the
+dataset (make sure to scale them if they are non-categorical).**
+
+**Feel free to try creating additional covariates such as polynomial or
+interaction terms (Hint: this can be done using I() in the formula), and
+you can also try to use a different likelihood (such as Student-t
+distribution).**
+
+**Fit your new model in INLA (i.e. Bayesian linear regression, mean
+speed is the response variable, and scaling done for the non-categorical
+covariates).**
+
+**Print out the summary of the INLA model. Compute the negative sum log
+CPO (NSLCPO) and DIC values for this model (smaller values indicate
+better fit).**
+
+**Compute the standard deviation of the mean residuals (i.e. the
+differences between the posterior mean of the fitted values and the true
+response variable).**
+
+**Discuss the results and compare your model to the model from b).**
+
+**Please only include your best performing model in the report.**
+
+Explanation: (Write your explanation here)
+
+```{r}
+
+```
+
+**d)[10 marks] We are going to perform model checks to evaluate the fit
+the two models in parts b) and c) on the data.**
+
+**Compute the studentized residuals for the Bayesian regression model
+from parts b) and c). Perform a simple Q-Q plot on the studentized
+residuals. Plot the studentized residuals versus their index, and also
+plot the studentized residuals against the posterior mean of the fitted
+value (see Lecture 2). Discuss the results.**
+
+Explanation: (Write your explanation here)
+
+```{r}
+
+```
+
+**e)[10 marks] In this question, we are going to use the model you have
+constructed in part c) to predict a new race, i.e. calculate the
+posterior probabilities of each participating horse winning that race.
+First, we load the dataset containing information about the future
+race.**
+
+```{r}
+race_to_predict <- read.csv(file = 'race_to_predict.csv')
+race_to_predict
+```
+
+```{r}
+runs_to_predict <- read.csv(file = 'runs_to_predict.csv')
+runs_to_predict
+```
+
+**Based on your model from part c), compute the posterior probabilities
+of each of these 14 horses winning the race. [Hint: you will need to
+sample from the posterior predictive distribution.]**
+
+Explanation: (Write your explanation here)
+
+```{r}
+
+```
